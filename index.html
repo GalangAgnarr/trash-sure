@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRASH-SURE — Smart Waste Management</title>
+
+<!-- Font Plus Jakarta Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --green-primary: #07472f;
+    --green-dark: #043322;
+    --green-bg-light: #f1f8f4;
+    --green-card-bg: #f3f9f5;
+    --text-dark: #0a291c;
+    --text-muted: #577366;
+    --border-light: #e1eee7;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #f4f9f6; /* <--- Diubah dari #ffffff ke warna hijau mint soft */
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; }
+
+  /* CONTAINER UTAMA */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- HEADER UTAMA --- */
+  header {
+    position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #f4f9f6; /* <--- Diubah dari #ffffff ke warna hijau mint soft */
+  border-bottom: 1px solid #e2eee7;
+  padding: 14px 0 10px;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .logo-brand {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .logo-img {
+    height: 74px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .btn-top-data {
+    background: var(--green-primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .btn-top-data:hover {
+    background: var(--green-dark);
+  }
+
+  .top-btn-svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  /* --- TAB MENU NAVIGATION --- */
+  .main-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .nav-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #4b6358;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .nav-tab.active {
+    background: var(--green-bg-light);
+    color: var(--green-primary);
+    font-weight: 700;
+  }
+
+  /* --- PAGE SECTIONS --- */
+  .page-section {
+    display: none;
+    padding: 24px 0 40px;
+  }
+
+  .page-section.active {
+    display: block;
+  }
+
+  /* ================= HALAMAN 1: BERANDA ================= */
+  .hero-banner {
+    background: var(--green-card-bg);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .banner-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #4a7563;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .banner-title {
+    font-size: 32px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--green-primary);
+    margin-bottom: 14px;
+  }
+
+  .banner-desc, .banner-desc-2 {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .banner-desc { margin-bottom: 10px; }
+  .banner-desc-2 { margin-bottom: 24px; }
+
+  .banner-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--green-primary);
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .btn-primary:hover { background: var(--green-dark); }
+
+  .btn-svg-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .btn-outline {
+    background: white;
+    color: var(--text-dark);
+    border: 1px solid var(--border-light);
+    padding: 11px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline:hover {
+    background: var(--green-bg-light);
+    border-color: var(--green-primary);
+  }
+
+  /* Mockup Waste Separator Mini */
+  .mini-separator-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+  }
+
+  .device-frame {
+    position: relative;
+    display: inline-block;
+    background: #07472f;
+    border-radius: 18px;
+    padding: 5px;
+    box-shadow: 0 4px 14px rgba(7, 71, 47, 0.1);
+  }
+
+  .device-notch {
+    width: 45%;
+    height: 6px;
+    background: #07472f;
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+  .notch-top { margin-bottom: -2px; }
+  .notch-bottom { margin-top: -2px; }
+
+  .device-screen {
+    background: #f4f9f6;
+    border-radius: 14px;
+    padding: 14px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .screen-header-bar {
+    width: 100%;
+    height: 7px;
+    background: #e9f3ed;
+    border-radius: 4px;
+  }
+
+  .cards-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .separator-card {
+    width: 36px;
+    height: 56px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .separator-card svg { width: 18px; height: 18px; }
+  .card-green { background: #dff0e6; color: #07472f; }
+  .card-blue  { background: #e0f0fc; color: #0284c7; }
+  .card-gray  { background: #e9ecef; color: #495057; }
+
+  .separator-label {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #577366;
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .feat-card {
+    background: #f4f9f6;
+    border: 1px solid #e2eee7;
+    border-radius: 14px;
+    padding: 18px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .feat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .feat-icon svg { width: 20px; height: 20px; }
+  .icon-orange { background-color: #fff4e5; color: #f97316; }
+  .icon-green  { background-color: #e6f4ea; color: #0b6644; }
+  .icon-blue   { background-color: #e0f2fe; color: #0284c7; }
+  .icon-emerald{ background-color: #ecfdf5; color: #10b981; }
+
+  .feat-card h4 { font-size: 14px; font-weight: 700; color: #0a291c; margin-bottom: 4px; }
+  .feat-card p { font-size: 12px; color: #577366; line-height: 1.5; }
+
+  .about-card-small {
+    background: #f4f9f6;
+    border: 1px solid #e2eee7;
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .about-card-small h3 { font-size: 18px; font-weight: 800; color: var(--green-primary); margin-bottom: 6px; }
+  .about-card-small p { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+
+  /* ================= HALAMAN 2: DASHBOARD ================= */
+  .badge-demo {
+    display: inline-block;
+    background: #e2f4ea;
+    color: var(--green-primary);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+  }
+
+  .stats-4x1 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-box {
+    background: white;
+    border: 1px solid #edf4f0;
+    border-radius: var(--radius-md);
+    padding: 18px;
+  }
+
+  .stat-box.soft-blue { background: #f4f8ff; border-color: #e0ecff; }
+  .stat-box span { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 4px; }
+  .stat-box strong { font-size: 24px; font-weight: 800; color: var(--green-primary); display: block; }
+  .stat-box small { font-size: 11px; color: #799487; }
+
+  .dashboard-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .card-section {
+    background: white;
+    border: 1px solid #edf4f0;
+    border-radius: var(--radius-md);
+    padding: 20px;
+  }
+
+  .card-section h3 { font-size: 16px; font-weight: 800; color: var(--text-dark); margin-bottom: 2px; }
+  .card-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+
+  .bar-row { margin-bottom: 14px; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+  .bar-track { height: 10px; background: #eaf3ee; border-radius: var(--radius-full); overflow: hidden; }
+  .bar-fill-org { width: 85%; background: var(--green-primary); height: 100%; }
+  .bar-fill-pls { width: 68%; background: #2563eb; height: 100%; }
+  .bar-fill-b3  { width: 42%; background: #64748b; height: 100%; }
+
+  .table-clean { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .table-clean th { text-align: left; padding: 8px 4px; color: var(--text-muted); font-weight: 600; font-size: 11.5px; }
+  .table-clean td { padding: 12px 4px; border-top: 1px solid #f1f7f3; font-weight: 600; }
+  .cell-cat { display: inline-flex; align-items: center; gap: 8px; }
+  .table-svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .cat-organik { color: #07472f; }
+  .cat-plastik { color: #0284c7; }
+  .cat-b3 { color: #495057; }
+
+  /* ================= HALAMAN 3: PANDUAN (5 KARTU) ================= */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 Kolom Sejajar di PC */
+    gap: 16px;
+  }
+
+  .step-card {
+    background: white;
+    border: 1px solid #edf4f0;
+    border-radius: var(--radius-md);
+    padding: 20px 16px;
+  }
+
+  .step-num { font-size: 28px; font-weight: 800; color: #65947f; margin-bottom: 8px; }
+  .step-card h4 { font-size: 14px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px; }
+  .step-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ================= HALAMAN 4: TENTANG ================= */
+  .vismis-card {
+    background: white;
+    border: 1px solid #edf4f0;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .vismis-card h3 { font-size: 16px; font-weight: 800; color: var(--green-primary); margin-bottom: 10px; }
+  .vismis-card p, .vismis-card ul { font-size: 13px; color: var(--text-muted); line-height: 1.6; padding-left: 18px; }
+
+
+  /* --- ILUSTRASI --- */
+  .hero-illustration { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; display: block; border-radius: 16px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); }
+
+  .cat-section { margin-bottom: 24px; }
+  .cat-title { font-size: 20px; font-weight: 800; color: var(--green-primary); margin-bottom: 4px; }
+  .cat-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cat-card { background: white; border: 1px solid #edf4f0; border-radius: 14px; padding: 12px 12px 18px; }
+  .cat-card img { width: 100%; height: auto; display: block; margin-bottom: 12px; }
+  .cat-card h4 { font-size: 15px; font-weight: 800; margin: 0 6px 2px; }
+  .cat-card p { font-size: 12.5px; color: var(--text-muted); margin: 0 6px; line-height: 1.5; }
+
+
+  /* --- DASHBOARD LANJUTAN --- */
+  .dash-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .dash-status { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .dash-status .badge-demo { margin-bottom: 0; }
+  .status-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--text-muted); background: white; border: 1px solid var(--border-light); padding: 5px 12px; border-radius: var(--radius-full); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; display: inline-block; }
+  .seg { display: inline-flex; background: white; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 3px; }
+  .seg-btn { border: none; background: transparent; padding: 7px 14px; font-size: 12.5px; font-weight: 700; color: #4b6358; border-radius: 6px; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
+  .seg-btn.active { background: var(--green-primary); color: #fff; }
+  .seg-btn:focus-visible { outline: 2px solid var(--green-primary); outline-offset: 2px; }
+  .dash-row { margin-bottom: 20px; }
+
+  .donut-wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; min-height: 215px; }
+  .donut { position: relative; width: 170px; height: 170px; flex-shrink: 0; }
+  .donut svg { width: 100%; height: 100%; }
+  .donut-seg { transition: stroke-dasharray 0.6s ease, stroke-dashoffset 0.6s ease; }
+  .donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut-center strong { font-size: 20px; font-weight: 800; color: var(--green-primary); line-height: 1.1; }
+  .donut-center span { font-size: 11px; color: var(--text-muted); }
+  .legend { list-style: none; flex: 1; min-width: 160px; }
+  .legend li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #f1f7f3; font-size: 12.5px; font-weight: 600; }
+  .legend li:first-child { border-top: none; }
+  .legend .dot, .trend-legend .dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; display: inline-block; }
+  .legend .lg-name { flex: 1; }
+  .legend .lg-val { color: var(--text-muted); }
+
+  .trend-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; color: var(--text-muted); margin-bottom: 6px; }
+  .trend-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  #trend-chart svg { width: 100%; height: auto; display: block; }
+
+  .fill-row { margin-bottom: 16px; }
+  .fill-bar { height: 100%; border-radius: var(--radius-full); transition: width 0.6s ease; }
+  .fill-note { display: block; margin-top: 4px; font-size: 11.5px; font-weight: 600; color: #799487; }
+  .fill-note.warn { color: #c2570c; }
+  .td-time { color: var(--text-muted); font-weight: 500; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .donut-seg, .fill-bar { transition: none; }
+  }
+
+
+  /* --- PANDUAN LANJUTAN --- */
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; }
+  .flow-chip { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border-light); border-radius: var(--radius-full); padding: 7px 14px 7px 10px; font-size: 12.5px; font-weight: 700; color: var(--green-primary); }
+  .flow-chip svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .flow-arrow { color: #8fb1a1; font-size: 20px; line-height: 1; }
+
+  .guide-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; align-items: start; margin-bottom: 32px; }
+  .tl { list-style: none; }
+  .tl-item { display: grid; grid-template-columns: 44px 1fr; gap: 16px; position: relative; padding-bottom: 16px; }
+  .tl-item:not(:last-child)::before { content: ""; position: absolute; left: 21px; top: 44px; bottom: -4px; width: 2px; background: #cfe3d8; }
+  .tl-num { width: 44px; height: 44px; border-radius: 50%; background: var(--green-primary); color: #fff; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .tl-card { background: white; border: 1px solid #edf4f0; border-radius: var(--radius-md); padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+  .tl-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .tl-icon svg { width: 22px; height: 22px; }
+  .tl-card h4 { font-size: 14.5px; font-weight: 800; color: var(--text-dark); margin-bottom: 3px; }
+  .tl-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+
+  .guide-aside { position: sticky; top: 170px; background: white; border: 1px solid #edf4f0; border-radius: var(--radius-lg); padding: 16px 16px 18px; text-align: center; }
+  .guide-aside img { width: 100%; height: auto; display: block; }
+  .guide-aside p { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; }
+
+  .faq-section { margin-bottom: 28px; }
+  .faq-section .cat-title { margin-bottom: 12px; }
+  .faq { background: white; border: 1px solid #edf4f0; border-radius: var(--radius-md); margin-bottom: 10px; }
+  .faq summary { list-style: none; cursor: pointer; padding: 14px 18px; font-size: 14px; font-weight: 700; color: var(--text-dark); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--green-primary); border-bottom: 2px solid var(--green-primary); transform: rotate(45deg); transition: transform 0.2s ease; flex-shrink: 0; margin-top: -3px; }
+  .faq[open] summary::after { transform: rotate(-135deg); margin-top: 3px; }
+  .faq summary:focus-visible { outline: 2px solid var(--green-primary); outline-offset: 2px; border-radius: var(--radius-md); }
+  .faq p { padding: 0 18px 16px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  .cta-band { background: var(--green-primary); color: #fff; border-radius: var(--radius-lg); padding: 26px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .cta-band h3 { font-size: 18px; font-weight: 800; margin-bottom: 2px; }
+  .cta-band p { font-size: 13px; color: #bcd9ca; }
+  .btn-light { background: #fff; color: var(--green-primary); border: none; padding: 11px 20px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.2s ease; }
+  .btn-light:hover { background: #e6f4ec; }
+
+  @media (max-width: 768px) {
+    .guide-layout { grid-template-columns: 1fr; gap: 16px; }
+    .guide-aside { position: static; }
+    .flow-arrow { display: none; }
+    .cta-band { padding: 22px 20px; }
+  }
+
+
+  /* --- TIM --- */
+  .team-section { margin-top: 8px; }
+  .team-grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .member { display: flex; align-items: center; gap: 14px; background: white; border: 1px solid #edf4f0; border-radius: var(--radius-md); padding: 14px 16px; }
+  .member-name { font-size: 14px; font-weight: 700; color: var(--text-dark); line-height: 1.35; }
+
+  /* FOOTER */
+  footer {
+    padding: 24px 0 32px;
+    text-align: center;
+    font-size: 12px;
+    color: #7d998c;
+    border-top: 1px solid #f0f7f3;
+  }
+
+  /* ========================================================= */
+  /* --- MEDIA QUERIES UNTUK TAMPILAN MOBILE (PONSEL) --- */
+  /* ========================================================= */
+  @media (max-width: 900px) {
+    .steps-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+
+    .hero-banner {
+      grid-template-columns: 1fr;
+      padding: 24px 20px;
+      gap: 20px;
+    }
+
+    .banner-title { font-size: 24px; }
+    .banner-desc, .banner-desc-2 { font-size: 13px; }
+
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stats-4x1 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .dashboard-grid-2 {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .cat-grid { grid-template-columns: 1fr; gap: 12px; }
+    .cat-card { display: grid; grid-template-columns: 110px 1fr; column-gap: 12px; align-items: center; padding: 10px; }
+    .cat-card img { grid-row: span 2; margin-bottom: 0; }
+
+    /* Steps Grid 2 Kolom di HP */
+    .steps-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    /* Langkah 5 memenuhi 2 kolom jika ganjil di mobile */
+    .step-card-last {
+      grid-column: span 2;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HEADER UTAMA -->
+  <header>
+    <div class="top-bar">
+      <a onclick="openPage('beranda')" class="logo-brand">
+        <img src="Logo Trash-Sure.png" alt="TRASH-SURE Logo" class="logo-img">
+      </a>
+      <button class="btn-top-data" onclick="openPage('dashboard')">
+        <svg class="top-btn-svg" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="3" y="10" width="4" height="10" rx="1"/>
+          <rect x="10" y="5" width="4" height="15" rx="1"/>
+          <rect x="16" y="12" width="4" height="8" rx="1"/>
+        </svg>
+        Lihat Data Sampah
+      </button>
+    </div>
+
+    <!-- MAIN TABS MENU -->
+    <nav class="main-tabs">
+      <button class="nav-tab active" onclick="openPage('beranda')">Beranda</button>
+      <button class="nav-tab" onclick="openPage('dashboard')">Dashboard</button>
+      <button class="nav-tab" onclick="openPage('panduan')">Panduan</button>
+      <button class="nav-tab" onclick="openPage('tentang')">Tentang</button>
+    </nav>
+  </header>
+
+  <!-- ================= HALAMAN 1: BERANDA ================= -->
+  <section class="page-section active" id="page-beranda">
+    <div class="hero-banner">
+      <div>
+        <span class="banner-eyebrow">Kenali. Pilah. Kelola</span>
+        <h1 class="banner-title">What if waste could be worth more?</h1>
+        <p class="banner-desc">Pernah terpikir ke mana perginya sampah yang kita buang setiap hari? Apakah semuanya sudah dipilah dengan benar?</p>
+        <p class="banner-desc-2">Trash-Sure ingin mengubah kebiasaan tersebut melalui teknologi pemilahan sampah otomatis yang lebih praktis.</p>
+        
+        <div class="banner-btns">
+          <button class="btn-primary" onclick="openPage('dashboard')">
+            <svg class="btn-svg-icon" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="3" y="10" width="4" height="10" rx="1"/>
+              <rect x="10" y="5" width="4" height="15" rx="1"/>
+              <rect x="16" y="12" width="4" height="8" rx="1"/>
+            </svg>
+            Buka Dashboard
+          </button>
+          <button class="btn-outline" onclick="openPage('panduan')">Cara Kerja</button>
+        </div>
+      </div>
+
+      <!-- ILUSTRASI HERO -->
+      <img src="ilustrasi/tong sampah 2.png" alt="Alat Trash-Sure dengan tiga wadah: organik, plastik, dan B3" class="hero-illustration">
+    </div>
+
+    <!-- 4 KARTU FITUR SEJAJAR -->
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon icon-orange">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+        </div>
+        <h4>Pemantauan Data</h4>
+        <p>Pantau jumlah sampah berdasarkan kategori.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon icon-green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+            <path d="M11 19h8.2a1.8 1.8 0 0 0 1.565-.89 1.77 1.77 0 0 0 .005-1.77L16.8 9.5"/>
+            <path d="M12 5.5l3.8 6.5H8.2L12 5.5z"/>
+          </svg>
+        </div>
+        <h4>Pemilahan Otomatis</h4>
+        <p>Mendukung proses pemilahan sampah.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon icon-blue">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="10" width="4" height="10" rx="1"/>
+            <rect x="10" y="5" width="4" height="15" rx="1"/>
+            <rect x="16" y="12" width="4" height="8" rx="1"/>
+          </svg>
+        </div>
+        <h4>Ringkasan Data</h4>
+        <p>Data tersaji dalam bentuk grafik dan tabel.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon icon-emerald">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 16.93C7.05 16.44 4 13.07 4 9C4 8.45 4.05 7.92 4.14 7.41C6.72 8.24 9.14 9.85 11 12.16V16.93ZM18.86 16.59C17.06 17.47 15.08 17.96 13 17.96V12.16C14.86 9.85 17.28 8.24 19.86 7.41C19.95 7.92 20 8.45 20 9C20 12.08 18.25 14.75 18.86 16.59Z"/>
+          </svg>
+        </div>
+        <h4>Ramah Lingkungan</h4>
+        <p>Mendorong kebiasaan memilah sampah.</p>
+      </div>
+    </div>
+
+    <!-- KENALI 3 KATEGORI -->
+    <div class="cat-section">
+      <h2 class="cat-title">Tiga kategori yang dikenali Trash-Sure</h2>
+      <p class="cat-sub">Setiap sampah diarahkan ke wadah yang sesuai dengan jenisnya.</p>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <img src="ilustrasi/kategori-organik.svg" alt="Sampah organik">
+          <h4 style="color:#07472f;">Organik</h4>
+          <p>Sisa makanan, kulit buah, dan daun.</p>
+        </div>
+        <div class="cat-card">
+          <img src="ilustrasi/kategori-plastik.svg" alt="Sampah plastik">
+          <h4 style="color:#0369a1;">Plastik</h4>
+          <p>Botol minuman, gelas plastik, dan kemasan.</p>
+        </div>
+        <div class="cat-card">
+          <img src="ilustrasi/kategori-b3.svg" alt="Sampah B3">
+          <h4 style="color:#475569;">B3</h4>
+          <p>Baterai, lampu, dan elektronik kecil.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENGENAL TRASH-SURE -->
+    <div class="about-card-small">
+      <h3>Mengenal Trash-Sure</h3>
+      <p>Teknologi untuk membantu pengelolaan sampah yang lebih terarah.</p>
+      <button class="btn-outline" onclick="openPage('tentang')">Tentang Kami →</button>
+    </div>
+  </section>
+
+  <!-- ================= HALAMAN 2: DASHBOARD ================= -->
+  <section class="page-section" id="page-dashboard">
+    <div style="margin-bottom: 14px;">
+      <span class="banner-eyebrow">RINGKASAN DATA</span>
+      <h2 style="font-size: 24px; font-weight: 800; color: var(--green-primary);">Dashboard Sampah</h2>
+      <p style="font-size: 13px; color: var(--text-muted);">Pantau data sampah yang tercatat oleh Trash-Sure.</p>
+    </div>
+
+    <!-- STATUS & FILTER PERIODE -->
+    <div class="dash-toolbar">
+      <div class="dash-status">
+        <span class="badge-demo">• MODE CONTOH / DEMO</span>
+        <span class="status-chip"><i class="status-dot"></i>Perangkat belum terhubung · menampilkan data contoh</span>
+      </div>
+      <div class="seg" role="group" aria-label="Pilih periode data">
+        <button class="seg-btn" data-range="today" aria-pressed="false">Hari ini</button>
+        <button class="seg-btn active" data-range="week" aria-pressed="true">7 hari</button>
+        <button class="seg-btn" data-range="month" aria-pressed="false">4 minggu</button>
+      </div>
+    </div>
+
+    <!-- STATISTIK 4 KOLOM PC -->
+    <div class="stats-4x1">
+      <div class="stat-box">
+        <span>Total Terkumpul</span>
+        <strong id="st-total"></strong>
+        <small>Seluruh kategori</small>
+      </div>
+      <div class="stat-box">
+        <span>Organik</span>
+        <strong id="st-org"></strong>
+        <small id="st-org-pct"></small>
+      </div>
+      <div class="stat-box soft-blue">
+        <span>Plastik</span>
+        <strong id="st-pls" style="color: #2563eb;"></strong>
+        <small id="st-pls-pct"></small>
+      </div>
+      <div class="stat-box">
+        <span>B3</span>
+        <strong id="st-b3" style="color: #475569;"></strong>
+        <small id="st-b3-pct"></small>
+      </div>
+    </div>
+
+    <!-- DONUT & TREN -->
+    <div class="dashboard-grid-2 dash-row">
+      <div class="card-section">
+        <h3>Jumlah per Kategori</h3>
+        <div class="card-sub">Distribusi berat sampah terkumpul</div>
+        <div class="donut-wrap">
+          <div class="donut">
+            <svg viewBox="0 0 160 160" role="img" aria-label="Diagram donut proporsi sampah per kategori">
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#eaf3ee" stroke-width="22"/>
+              <g transform="rotate(-90 80 80)" id="donut-segs"></g>
+            </svg>
+            <div class="donut-center"><strong id="donut-total"></strong><span>total</span></div>
+          </div>
+          <ul class="legend" id="donut-legend"></ul>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <h3 id="trend-title">Tren</h3>
+        <div class="card-sub" id="trend-sub"></div>
+        <div class="trend-legend">
+          <span><i class="dot" style="background:#1f8a5b"></i>Organik</span>
+          <span><i class="dot" style="background:#0284c7"></i>Plastik</span>
+          <span><i class="dot" style="background:#64748b"></i>B3</span>
+        </div>
+        <div id="trend-chart"></div>
+      </div>
+    </div>
+
+    <!-- KETERISIAN WADAH & DATA TERBARU -->
+    <div class="dashboard-grid-2 dash-row">
+      <div class="card-section">
+        <h3>Keterisian Wadah</h3>
+        <div class="card-sub">Contoh kapasitas terpakai per wadah</div>
+        <div id="fill-list"></div>
+      </div>
+
+      <div class="card-section">
+        <h3>Data Terbaru</h3>
+        <div class="card-sub">Contoh catatan sampah</div>
+
+        <table class="table-clean">
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Jam</th>
+              <th>Kategori</th>
+              <th style="text-align: right;">Berat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01 Nov 2026</td><td class="td-time">14.20</td>
+              <td><span class="cell-cat cat-b3">
+                <svg class="table-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L22 20H2Z"/><path d="M12 10v5"/></svg>B3</span></td>
+              <td style="text-align: right;">1,8 kg</td>
+            </tr>
+            <tr>
+              <td>01 Nov 2026</td><td class="td-time">12.45</td>
+              <td><span class="cell-cat cat-plastik">
+                <svg class="table-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.565-.89 1.77 1.77 0 0 0 .005-1.77L16.8 9.5"/><path d="M12 5.5l3.8 6.5H8.2L12 5.5z"/></svg>Plastik</span></td>
+              <td style="text-align: right;">2,4 kg</td>
+            </tr>
+            <tr>
+              <td>01 Nov 2026</td><td class="td-time">10.10</td>
+              <td><span class="cell-cat cat-organik">
+                <svg class="table-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5 16 5 21C7 21 13 21 18 16C21 13 20 8 17 8Z"/></svg>Organik</span></td>
+              <td style="text-align: right;">3,2 kg</td>
+            </tr>
+            <tr>
+              <td>31 Okt 2026</td><td class="td-time">15.30</td>
+              <td><span class="cell-cat cat-plastik">
+                <svg class="table-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.2a1.8 1.8 0 0 0 1.565-.89 1.77 1.77 0 0 0 .005-1.77L16.8 9.5"/><path d="M12 5.5l3.8 6.5H8.2L12 5.5z"/></svg>Plastik</span></td>
+              <td style="text-align: right;">1,0 kg</td>
+            </tr>
+            <tr>
+              <td>31 Okt 2026</td><td class="td-time">09.05</td>
+              <td><span class="cell-cat cat-organik">
+                <svg class="table-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5 16 5 21C7 21 13 21 18 16C21 13 20 8 17 8Z"/></svg>Organik</span></td>
+              <td style="text-align: right;">1,2 kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="font-size: 11px; color: #7f998c; margin-top: 14px;">Catatan: angka di atas merupakan data ilustrasi untuk contoh tampilan. Data aktual akan muncul setelah perangkat terhubung.</p>
+  </section>
+
+  <!-- ================= HALAMAN 3: PANDUAN ================= -->
+  <section class="page-section" id="page-panduan">
+    <div style="margin-bottom: 20px;">
+      <span class="banner-eyebrow">PANDUAN</span>
+      <h2 style="font-size: 24px; font-weight: 800; color: var(--green-primary);">How Does It Work?</h2>
+      <p style="font-size: 13px; color: var(--text-muted);">Tidak perlu proses yang rumit. Trash-Sure dirancang agar pengguna dapat memilah sampah dengan lebih praktis.</p>
+    </div>
+
+    <!-- ALUR SINGKAT -->
+    <div class="flow" aria-label="Ringkasan alur Trash-Sure">
+      <span class="flow-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>Sampah</span><span class="flow-arrow" aria-hidden="true">›</span><span class="flow-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Sensor</span><span class="flow-arrow" aria-hidden="true">›</span><span class="flow-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>ESP32</span><span class="flow-arrow" aria-hidden="true">›</span><span class="flow-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M12 9L6 15v6"/><path d="M12 9l6 6v6"/></svg>Wadah</span><span class="flow-arrow" aria-hidden="true">›</span><span class="flow-chip"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="10" width="4" height="10" rx="1"/><rect x="10" y="5" width="4" height="15" rx="1"/><rect x="16" y="12" width="4" height="8" rx="1"/></svg>Dashboard</span>
+    </div>
+
+    <!-- TIMELINE + ILUSTRASI -->
+    <div class="guide-layout">
+      <div>
+        <ol class="tl">
+          <li class="tl-item">
+            <div class="tl-num">1</div>
+            <div class="tl-card">
+              <div class="tl-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M5 21h14"/></svg></div>
+              <div><h4>Insert Your Waste</h4><p>Masukkan sampah ke bagian input yang telah disediakan.</p></div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-num">2</div>
+            <div class="tl-card">
+              <div class="tl-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <div><h4>Waste Detection</h4><p>Sensor mulai membaca karakteristik sampah untuk membantu menentukan kategorinya.</p></div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-num">3</div>
+            <div class="tl-card">
+              <div class="tl-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></div>
+              <div><h4>Data Processing</h4><p>Hasil pembacaan sensor diproses oleh ESP32 sebagai dasar pengendalian mekanisme pemilahan.</p></div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-num">4</div>
+            <div class="tl-card">
+              <div class="tl-icon icon-emerald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M12 9L6 15v6"/><path d="M12 9l6 6v6"/></svg></div>
+              <div><h4>Automatic Sorting</h4><p>Sampah diarahkan menuju wadah penampungan kategori yang teridentifikasi.</p></div>
+            </div>
+          </li>
+          <li class="tl-item">
+            <div class="tl-num">5</div>
+            <div class="tl-card">
+              <div class="tl-icon icon-green"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="10" width="4" height="10" rx="1"/><rect x="10" y="5" width="4" height="15" rx="1"/><rect x="16" y="12" width="4" height="8" rx="1"/></svg></div>
+              <div><h4>Monitor the Results</h4><p>Hasil deteksi ditampilkan pada dashboard agar proses pemilahan dapat dipantau.</p></div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <aside class="guide-aside">
+        <img src="ilustrasi/hero-trash-sure.svg" alt="Alat Trash-Sure dengan tiga wadah pemilah">
+        <p>Sampah masuk dari bagian atas, lalu diarahkan ke salah satu dari tiga wadah.</p>
+      </aside>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h3 class="cat-title">Pertanyaan yang sering muncul</h3>
+      <details class="faq">
+        <summary>Jenis sampah apa saja yang dikenali?</summary>
+        <p>Trash-Sure mengelompokkan sampah ke dalam tiga kategori: organik, plastik, dan B3.</p>
+      </details>
+      <details class="faq">
+        <summary>Bagaimana kategori sampah ditentukan?</summary>
+        <p>Sensor membaca karakteristik sampah, lalu hasil pembacaannya diproses oleh ESP32 untuk mengendalikan mekanisme pemilahan.</p>
+      </details>
+      <details class="faq">
+        <summary>Di mana hasil pemilahan bisa dilihat?</summary>
+        <p>Di halaman Dashboard. Di sana tersedia jumlah sampah per kategori, grafik tren, dan catatan terbaru.</p>
+      </details>
+      <details class="faq">
+        <summary>Apakah data di Dashboard sudah data asli?</summary>
+        <p>Belum. Saat ini Dashboard menampilkan data contoh. Data asli akan muncul setelah perangkat terhubung.</p>
+      </details>
+    </div>
+
+    <!-- AJAKAN -->
+    <div class="cta-band">
+      <div>
+        <h3>Sudah paham alurnya?</h3>
+        <p>Lihat bagaimana hasil pemilahan ditampilkan di Dashboard.</p>
+      </div>
+      <button class="btn-light" onclick="openPage('dashboard')">Buka Dashboard</button>
+    </div>
+  </section>
+
+  <!-- ================= HALAMAN 4: TENTANG ================= -->
+  <section class="page-section" id="page-tentang">
+    <div class="hero-banner" style="grid-template-columns: 1fr;">
+      <div>
+        <span class="banner-eyebrow">TENTANG KAMI</span>
+        <h1 class="banner-title">Dari kebiasaan kecil,<br>pengelolaan lebih terarah.</h1>
+        <p class="banner-desc">Trash-Sure merupakan inovasi pengelolaan sampah yang dikembangkan oleh tim Bin-Go. Sistem ini dirancang untuk membantu proses pemilahan sampah serta memantau jumlah sampah berdasarkan kategori melalui dashboard digital.</p>
+      </div>
+    </div>
+
+    <div class="vismis-card">
+      <h3>Visi</h3>
+      <p style="padding-left:0;">Menjadi solusi pemilahan sampah yang praktis dan mudah diterapkan di berbagai institusi untuk membangun kebiasaan memilah sampah sejak dari sumbernya serta mendukung pengelolaan sampah yang lebih terarah. Berkontribusi dalam mewujudkan budaya pemilahan sampah yang konsisten dan bertanggung jawab demi lingkungan yang lebih berkelanjutan.</p>
+    </div>
+
+    <div class="vismis-card">
+      <h3>Misi</h3>
+      <ul>
+        <li>Menghadirkan solusi pemilahan sampah yang praktis dan mudah digunakan.</li>
+        <li>Membangun kebiasaan memilah sampah sejak dari sumbernya.</li>
+        <li>Mendukung pengelolaan sampah berbasis data melalui pencatatan dan pemantauan sampah berdasarkan kategori.</li>
+        <li>Memperluas penerapan solusi pemilahan sampah secara bertahap dan berkelanjutan melalui kerja sama dengan berbagai institusi dan pihak terkait.</li>
+      </ul>
+    </div>
+      <div class="team-section">
+      <h3 class="cat-title">Tim Bin-Go</h3>
+      <p class="cat-sub">Para pengembang Trash-Sure.</p>
+      <ul class="team-grid">
+        <li class="member"><span class="member-name">Rizqika Nur Rahma</span></li>
+        <li class="member"><span class="member-name">Bintang Pasa Janeetra Wahyudi</span></li>
+        <li class="member"><span class="member-name">Andika Agung Nugraha Putra</span></li>
+        <li class="member"><span class="member-name">Jihan Pinkan Eghnilia Wariki</span></li>
+        <li class="member"><span class="member-name">Aditya Agung Nurcahya Putra</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <b>TRASH-SURE</b> &nbsp; Bin-Go Team · Smart Waste Management &nbsp; © 2026
+  </footer>
+</div>
+
+<script>
+  function openPage(pageName) {
+    document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+
+    const targetSection = document.getElementById('page-' + pageName);
+    if(targetSection) {
+      targetSection.classList.add('active');
+    }
+
+    const tabs = document.querySelectorAll('.nav-tab');
+    const pageIndex = { 'beranda': 0, 'dashboard': 1, 'panduan': 2, 'tentang': 3 };
+    if(tabs[pageIndex[pageName]]) {
+      tabs[pageIndex[pageName]].classList.add('active');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+<script>
+(function () {
+  var COL = { org: '#1f8a5b', pls: '#0284c7', b3: '#64748b' };
+  var NAME = { org: 'Organik', pls: 'Plastik', b3: 'B3' };
+  var KEYS = ['org', 'pls', 'b3'];
+
+  // Semua angka di bawah adalah data contoh (demo)
+  var DATA = {
+    today: { title: 'Tren Hari Ini', sub: 'Berat sampah per waktu (kg)',
+      labels: ['Pagi', 'Siang', 'Sore'],
+      org: [1.2, 1.3, 0.7], pls: [0.8, 0.9, 0.7], b3: [0.6, 0.7, 0.5] },
+    week: { title: 'Tren 7 Hari Terakhir', sub: 'Berat sampah per hari (kg)',
+      labels: ['26 Okt', '27 Okt', '28 Okt', '29 Okt', '30 Okt', '31 Okt', '1 Nov'],
+      org: [1.2, 1.4, 0.9, 1.3, 1.0, 1.2, 3.2],
+      pls: [0.9, 1.2, 1.0, 1.4, 0.8, 1.0, 2.4],
+      b3:  [0.5, 0.7, 0.6, 0.8, 0.5, 0.8, 1.8] },
+    month: { title: 'Tren 4 Minggu Terakhir', sub: 'Berat sampah per minggu (kg)',
+      labels: ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4'],
+      org: [8.9, 9.7, 9.6, 10.2], pls: [7.4, 7.9, 7.6, 8.7], b3: [4.8, 4.9, 4.9, 5.7] }
+  };
+
+  var BINS = [
+    { key: 'org', pct: 84 },
+    { key: 'pls', pct: 54 },
+    { key: 'b3',  pct: 31 }
+  ];
+
+  function r1(n) { return Math.round(n * 10) / 10; }
+  function fmt(n) { return r1(n).toFixed(1).replace('.', ','); }
+  function sum(a) { return r1(a.reduce(function (x, y) { return x + y; }, 0)); }
+  function $(id) { return document.getElementById(id); }
+
+  // ----- donut: buat segmen sekali -----
+  var R = 60, C = 2 * Math.PI * R;
+  var NS = 'http://www.w3.org/2000/svg';
+  var segs = {};
+  KEYS.forEach(function (k) {
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', 80); c.setAttribute('cy', 80); c.setAttribute('r', R);
+    c.setAttribute('fill', 'none'); c.setAttribute('stroke', COL[k]); c.setAttribute('stroke-width', 22);
+    c.setAttribute('class', 'donut-seg');
+    c.style.strokeDasharray = '0 ' + C;
+    $('donut-segs').appendChild(c);
+    segs[k] = c;
+  });
+
+  function renderTrend(d) {
+    var n = d.labels.length;
+    var totals = d.labels.map(function (_, i) { return r1(d.org[i] + d.pls[i] + d.b3[i]); });
+    var max = Math.max.apply(null, totals);
+    var step = max <= 4 ? 1 : max <= 10 ? 2 : max <= 30 ? 5 : 10;
+    var yMax = Math.ceil(max / step) * step;
+    var W = 480, H = 230, ml = 34, mr = 8, mt = 16, mb = 28;
+    var pw = W - ml - mr, ph = H - mt - mb;
+    var band = pw / n, bw = Math.min(band * 0.55, 44);
+    var out = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + d.title + '">';
+    for (var v = 0; v <= yMax; v += step) {
+      var y = mt + ph - (v / yMax) * ph;
+      out += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + y + '" y2="' + y + '" stroke="#e8f1ec" stroke-width="1"/>';
+      out += '<text x="' + (ml - 6) + '" y="' + (y + 3.5) + '" text-anchor="end" font-size="10.5" fill="#577366">' + v + '</text>';
+    }
+    for (var i = 0; i < n; i++) {
+      var cx = ml + band * i + band / 2, x = cx - bw / 2, base = mt + ph;
+      KEYS.forEach(function (k) {
+        var h = (d[k][i] / yMax) * ph;
+        base -= h;
+        out += '<rect x="' + x + '" y="' + base + '" width="' + bw + '" height="' + h + '" fill="' + COL[k] + '" stroke="#fff" stroke-width="1"><title>' + d.labels[i] + ' · ' + NAME[k] + ' ' + fmt(d[k][i]) + ' kg</title></rect>';
+      });
+      out += '<text x="' + cx + '" y="' + (base - 5) + '" text-anchor="middle" font-size="10" font-weight="700" fill="#07472f">' + fmt(totals[i]) + '</text>';
+      out += '<text x="' + cx + '" y="' + (H - 9) + '" text-anchor="middle" font-size="10.5" fill="#577366">' + d.labels[i] + '</text>';
+    }
+    out += '</svg>';
+    $('trend-chart').innerHTML = out;
+  }
+
+  function render(range) {
+    var d = DATA[range];
+    var t = { org: sum(d.org), pls: sum(d.pls), b3: sum(d.b3) };
+    var total = r1(t.org + t.pls + t.b3);
+    var p = {
+      org: Math.round(t.org / total * 1000) / 10,
+      pls: Math.round(t.pls / total * 1000) / 10
+    };
+    p.b3 = r1(100 - p.org - p.pls);
+
+    $('st-total').textContent = fmt(total) + ' kg';
+    KEYS.forEach(function (k) {
+      $('st-' + k).textContent = fmt(t[k]) + ' kg';
+      $('st-' + k + '-pct').textContent = fmt(p[k]) + '% dari total';
+    });
+    $('donut-total').textContent = fmt(total) + ' kg';
+
+    var start = 0;
+    KEYS.forEach(function (k) {
+      var full = C * (t[k] / total);
+      var len = Math.max(full - 2, 0);
+      segs[k].style.strokeDasharray = len + ' ' + (C - len);
+      segs[k].style.strokeDashoffset = -start;
+      start += full;
+    });
+
+    $('donut-legend').innerHTML = KEYS.map(function (k) {
+      return '<li><i class="dot" style="background:' + COL[k] + '"></i><span class="lg-name">' + NAME[k] +
+             '</span><span class="lg-val">' + fmt(t[k]) + ' kg · ' + fmt(p[k]) + '%</span></li>';
+    }).join('');
+
+    $('trend-title').textContent = d.title;
+    $('trend-sub').textContent = d.sub;
+    renderTrend(d);
+  }
+
+  function renderBins() {
+    $('fill-list').innerHTML = BINS.map(function (b) {
+      var warn = b.pct >= 80;
+      var color = warn ? '#f97316' : COL[b.key];
+      return '<div class="fill-row"><div class="bar-label"><span>' + NAME[b.key] + '</span><span>' + b.pct + '%</span></div>' +
+             '<div class="bar-track"><div class="fill-bar" style="width:' + b.pct + '%;background:' + color + '"></div></div>' +
+             '<span class="fill-note' + (warn ? ' warn' : '') + '">' + (warn ? 'Hampir penuh — segera kosongkan' : 'Masih aman') + '</span></div>';
+    }).join('');
+  }
+
+  document.querySelectorAll('.seg-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.seg-btn').forEach(function (b) {
+        b.classList.remove('active'); b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
+      render(btn.getAttribute('data-range'));
+    });
+  });
+
+  render('week');
+  renderBins();
+})();
+</script>
+</body>
+</html>
